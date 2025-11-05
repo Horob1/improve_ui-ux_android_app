@@ -34,6 +34,8 @@ import androidx.navigation.compose.currentBackStackEntryAsState
 import androidx.navigation.compose.rememberNavController
 import com.acntem.improveuiapp.presentation.screen.about.AboutScreen
 import com.acntem.improveuiapp.presentation.screen.home.HomeScreen
+import com.acntem.improveuiapp.presentation.screen.ui.LayoutOptimizationScreen
+import com.acntem.improveuiapp.presentation.screen.ui.UiOptimizationScreen
 import com.acntem.improveuiapp.presentation.ui.theme.dimens
 
 
@@ -128,9 +130,19 @@ fun SetupNavGraph(
                     composable<NavScreen.About> {
                         AboutScreen()
                     }
+
+
                 }
             }
+        }
+        composable<NavScreen.UiOptimizationScreen> {
+            UiOptimizationScreen(
+                navController = navController
+            )
+        }
 
+        composable<NavScreen.LayoutOptimizationScreen> {
+            LayoutOptimizationScreen()
         }
     }
 }

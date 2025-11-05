@@ -51,12 +51,9 @@ fun HomeScreen(
             R.drawable.violet_face,
         )
     }
-
     val idx = remember {
         Random.nextInt(logos.size)
     }
-
-
     LazyColumn(
         modifier = Modifier.fillMaxSize()
             .padding(top = 16.dp)
@@ -95,7 +92,7 @@ fun HomeScreen(
                 name = "UI",
                 desc = "Improve UI technique",
                 onClick = {
-
+                    onNavigate(NavScreen.UiOptimizationScreen)
                 },
                 count = 0,
                 color = MaterialTheme.colorScheme.primary.copy(

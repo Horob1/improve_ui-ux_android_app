@@ -13,4 +13,10 @@ sealed class NavScreen {
     @Serializable
     data object About : NavScreen()
 
+    @Serializable
+    data object UiOptimizationScreen : NavScreen()
+
+    @Serializable
+    data object LayoutOptimizationScreen: NavScreen()
+
 }
