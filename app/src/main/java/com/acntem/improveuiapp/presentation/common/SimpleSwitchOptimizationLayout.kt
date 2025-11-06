@@ -1,7 +1,13 @@
 package com.acntem.improveuiapp.presentation.common
 
-import androidx.compose.foundation.layout.Box
-import androidx.compose.foundation.layout.BoxScope
+import androidx.compose.animation.AnimatedContent
+import androidx.compose.animation.SizeTransform
+import androidx.compose.animation.core.tween
+import androidx.compose.animation.fadeIn
+import androidx.compose.animation.fadeOut
+import androidx.compose.animation.slideInHorizontally
+import androidx.compose.animation.slideOutHorizontally
+import androidx.compose.animation.togetherWith
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.padding
 import androidx.compose.material.icons.Icons
@@ -16,17 +22,17 @@ import androidx.compose.material3.TopAppBar
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.saveable.rememberSaveable
+import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
-import androidx.compose.ui.unit.dp
 
 @Preview
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun SimpleSwitchOptimizationLayout(
     title: String =  "UI Optimization 🎶",
-    optimizeContent: @Composable BoxScope.() -> Unit = {},
-    nonOptimizeContent: @Composable BoxScope.() -> Unit= {},
+    optimizeContent: @Composable () -> Unit = {},
+    nonOptimizeContent: @Composable () -> Unit= {},
     onPopBackStack: () -> Unit = {}
 ) {
     val isOptimized = rememberSaveable { mutableStateOf(false) }
@@ -54,11 +60,36 @@ fun SimpleSwitchOptimizationLayout(
                 }
             )
         },
-    ) {
-        Box(
-            Modifier.padding(it).fillMaxSize()
-        ){
-            if (isOptimized.value) {
+    ) { paddingValues ->
+        AnimatedContent(
+            targetState = isOptimized.value,
+            modifier = Modifier.padding(paddingValues).fillMaxSize(),
+            contentAlignment = Alignment.Center,
+            transitionSpec = {
+                if (targetState) {
+                    slideInHorizontally(
+                        initialOffsetX = { it },
+                        animationSpec = tween(400)
+                    ) + fadeIn(animationSpec = tween(400)) togetherWith
+                            slideOutHorizontally(
+                                targetOffsetX = { -it / 2 },
+                                animationSpec = tween(400)
+                            ) + fadeOut(animationSpec = tween(400))
+                } else {
+                    slideInHorizontally(
+                        initialOffsetX = { -it },
+                        animationSpec = tween(400)
+                    ) + fadeIn(animationSpec = tween(400)) togetherWith
+                            slideOutHorizontally(
+                                targetOffsetX = { it / 2 },
+                                animationSpec = tween(400)
+                            ) + fadeOut(animationSpec = tween(400))
+                }.using(
+                    SizeTransform(clip = false)
+                )
+            }
+        ) {state ->
+            if (state) {
                 optimizeContent()
             } else {
                 nonOptimizeContent()

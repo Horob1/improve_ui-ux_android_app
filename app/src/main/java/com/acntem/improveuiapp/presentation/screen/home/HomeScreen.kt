@@ -130,18 +130,11 @@ fun ImproveNavCard(
 
     val density = LocalDensity.current.density
 
-    val rotation = remember { Animatable(0f) }
+    val rotation = remember { Animatable(-12f) }
 
     LaunchedEffect(Unit) {
         rotation.animateTo(
             targetValue = 12f,
-            animationSpec = tween(
-                durationMillis = 1000,
-                easing = FastOutSlowInEasing
-            )
-        )
-        rotation.animateTo(
-            targetValue = -12f,
             animationSpec = tween(
                 durationMillis = 1000,
                 easing = FastOutSlowInEasing
