@@ -1,4 +1,4 @@
-package com.acntem.improveuiapp.presentation.domain
+package com.acntem.improveuiapp.domain
 
 data class OptimizationItem(
     val id: Int,

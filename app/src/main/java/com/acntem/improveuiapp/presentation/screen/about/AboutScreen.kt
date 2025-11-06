@@ -32,7 +32,7 @@ import com.acntem.improveuiapp.presentation.ui.theme.dimens
 fun AboutScreen(){
     Column(
         modifier = Modifier
-            .fillMaxSize() // Chiếm toàn bộ màn hình
+            .fillMaxSize()
             .padding(16.dp),
         horizontalAlignment = Alignment.CenterHorizontally,
         verticalArrangement = Arrangement.SpaceAround

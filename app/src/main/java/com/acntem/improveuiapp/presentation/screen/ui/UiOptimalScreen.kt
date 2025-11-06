@@ -10,6 +10,7 @@ import androidx.compose.foundation.lazy.items
 import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.automirrored.outlined.ArrowForward
 import androidx.compose.material.icons.filled.Speed
 import androidx.compose.material.icons.outlined.ArrowForward
 import androidx.compose.material3.*
@@ -23,7 +24,7 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.navigation.NavController
-import com.acntem.improveuiapp.presentation.domain.OptimizationItem
+import com.acntem.improveuiapp.domain.OptimizationItem
 import com.acntem.improveuiapp.presentation.navigation.NavScreen
 
 
@@ -217,7 +218,7 @@ private fun OptimizationCard(
                 contentAlignment = Alignment.Center
             ) {
                 Icon(
-                    imageVector = Icons.Outlined.ArrowForward,
+                    imageVector = Icons.AutoMirrored.Outlined.ArrowForward,
                     contentDescription = "View details",
                     tint = MaterialTheme.colorScheme.primary,
                     modifier = Modifier.size(20.dp)

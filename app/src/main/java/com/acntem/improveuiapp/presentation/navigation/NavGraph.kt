@@ -34,11 +34,12 @@ import androidx.navigation.compose.currentBackStackEntryAsState
 import androidx.navigation.compose.rememberNavController
 import com.acntem.improveuiapp.presentation.screen.about.AboutScreen
 import com.acntem.improveuiapp.presentation.screen.home.HomeScreen
-import com.acntem.improveuiapp.presentation.screen.ui.LayoutOptimizationScreen
+import com.acntem.improveuiapp.presentation.screen.ui.screen.LayoutOptimizationScreen
 import com.acntem.improveuiapp.presentation.screen.ui.UiOptimizationScreen
 import com.acntem.improveuiapp.presentation.ui.theme.dimens
 
 
+@Suppress("ParamsComparedByRef")
 @ExperimentalAnimationApi
 @Composable
 fun SetupNavGraph(
@@ -142,11 +143,13 @@ fun SetupNavGraph(
         }
 
         composable<NavScreen.LayoutOptimizationScreen> {
-            LayoutOptimizationScreen()
+            LayoutOptimizationScreen(
+            )
         }
     }
 }
 
+@Suppress("ParamsComparedByRef")
 @Composable
 fun NavBottomBar(navController: NavController) {
 

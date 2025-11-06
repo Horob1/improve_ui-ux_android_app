@@ -54,6 +54,7 @@ fun HomeScreen(
     val idx = remember {
         Random.nextInt(logos.size)
     }
+
     LazyColumn(
         modifier = Modifier.fillMaxSize()
             .padding(top = 16.dp)
@@ -159,21 +160,7 @@ fun ImproveNavCard(
             ).pointerInput(Unit) {
                 detectTapGestures(
                     onPress = {
-                            rotation.animateTo(
-                                targetValue = 12f,
-                                animationSpec = tween(
-                                    durationMillis = 1000,
-                                    easing = FastOutSlowInEasing
-                                )
-                            )
                             tryAwaitRelease()
-                            rotation.animateTo(
-                                targetValue = -12f,
-                                animationSpec = tween(
-                                durationMillis = 1000,
-                                easing = FastOutSlowInEasing
-                                )
-                            )
                             onClick()
                     }
                 )
