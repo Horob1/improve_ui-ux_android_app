@@ -1,4 +1,4 @@
-package com.acntem.improveuiapp.presentation.screen.ui.screen
+package com.acntem.improveuiapp.presentation.screen.ui
 
 
 import androidx.compose.material3.*
