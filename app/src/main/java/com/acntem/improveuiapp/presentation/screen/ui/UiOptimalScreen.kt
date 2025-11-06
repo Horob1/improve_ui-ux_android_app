@@ -26,36 +26,42 @@ import androidx.navigation.NavController
 import com.acntem.improveuiapp.presentation.domain.OptimizationItem
 import com.acntem.improveuiapp.presentation.navigation.NavScreen
 
-private val optimizationItems = listOf(
-    OptimizationItem(1, "Reduce Recomposition", "Compare UI with excessive recomposition vs optimized version"),
-    OptimizationItem(2, "LazyColumn vs Column", "Compare performance when scrolling a long list"),
-    OptimizationItem(3, "remember & derivedStateOf", "Reduce unnecessary recomputation")
-)
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun UiOptimizationScreen(
     navController: NavController
 ) {
+    Scaffold() {paddingValues ->
         LazyColumn(
             modifier = Modifier
+                .padding(paddingValues)
                 .fillMaxSize(),
             contentPadding = PaddingValues(20.dp),
             verticalArrangement = Arrangement.spacedBy(16.dp)
         ) {
-            item {
-                HeaderSection()
+            stickyHeader {
+                Box(
+                    Modifier
+                        .fillMaxWidth()
+                        .background(MaterialTheme.colorScheme.background)
+                ) {
+                    HeaderSection()
+                }
             }
 
             items(optimizationItems, key = { it.id }) { item ->
                 OptimizationCard(
                     item = item,
                     onClick = {
-                        navController.navigate(NavScreen.LayoutOptimizationScreen)
+                        when (item.id) {
+                            1 -> navController.navigate(NavScreen.LayoutOptimizationScreen)
+                        }
                     }
                 )
             }
         }
+    }
 }
 
 @Composable
@@ -227,3 +233,56 @@ private fun OptimizationCard(
         }
     }
 }
+
+private val optimizationItems = listOf(
+    OptimizationItem(
+        1,
+        "Layout Optimization",
+        "Compare deeply nested layouts vs flat optimized layouts to reduce composition cost."
+    ),
+    OptimizationItem(
+        2,
+        "LazyColumn vs Column",
+        "Compare performance of LazyColumn and Column when rendering large lists."
+    ),
+    OptimizationItem(
+        3,
+        "remember & derivedStateOf",
+        "Avoid unnecessary recompositions by caching and deriving stable states."
+    ),
+    OptimizationItem(
+        4,
+        "Stable vs Unstable Parameters",
+        "Show how passing unstable data classes triggers recomposition unnecessarily."
+    ),
+    OptimizationItem(
+        5,
+        "keys() in Lazy Lists",
+        "Use key() in LazyColumn items to preserve state and avoid full recomposition."
+    ),
+    OptimizationItem(
+        6,
+        "State Hoisting & Snapshot Flow",
+        "Demonstrate moving state upward to reduce recomposition scope."
+    ),
+    OptimizationItem(
+        7,
+        "rememberSaveable",
+        "Compare remember vs rememberSaveable for handling config changes efficiently."
+    ),
+    OptimizationItem(
+        8,
+        "Recomposition Scope Control",
+        "Split UI into smaller composables to isolate recompositions."
+    ),
+    OptimizationItem(
+        9,
+        "SideEffect, LaunchedEffect, DisposableEffect",
+        "Demonstrate correct use of side-effects to avoid redundant executions."
+    ),
+    OptimizationItem(
+        10,
+        "Subcomposition Layouts (SubcomposeLayout)",
+        "Show advanced optimization by composing only visible/needed content."
+    )
+)
