@@ -1,14 +1,12 @@
-package com.acntem.improveuiapp.presentation.screen.ux.screen
+package com.acntem.improveuiapp.presentation.screen.ux
 
 import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Box
-import androidx.compose.foundation.layout.BoxScope
 import androidx.compose.foundation.layout.padding
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
-import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.navigation.NavController
@@ -44,16 +42,13 @@ fun UseSafePopBackStack (
 }
 
 @Composable
-fun BoxScope.NavBox(
+fun NavBox(
     modifier: Modifier = Modifier,
     onClick: () -> Unit,
     text: String,
 ) {
     Box(
         modifier = modifier
-            .align(
-                Alignment.Center
-            )
             .clickable(
                 onClick = onClick
             ).clip(
