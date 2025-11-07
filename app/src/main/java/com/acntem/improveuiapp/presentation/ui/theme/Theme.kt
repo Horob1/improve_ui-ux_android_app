@@ -79,7 +79,7 @@ fun ImproveUIAppTheme(
     if (!view.isInEditMode) {
         SideEffect {
             val window = (view.context as Activity).window
-            setStatusBarColor(window, color = colorScheme.surface.toArgb())
+            setStatusBarColor(window, color = colorScheme.background.toArgb())
             WindowCompat.getInsetsController(window, view).isAppearanceLightStatusBars = !darkTheme
         }
     }

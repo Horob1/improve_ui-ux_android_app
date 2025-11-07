@@ -11,11 +11,13 @@ import androidx.compose.animation.core.animateDpAsState
 import androidx.compose.animation.core.tween
 import androidx.compose.animation.fadeIn
 import androidx.compose.animation.fadeOut
+import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Assistant
 import androidx.compose.material.icons.filled.Home
+import androidx.compose.material.icons.filled.Lightbulb
 import androidx.compose.material.icons.filled.Speed
 import androidx.compose.material3.Icon
 import androidx.compose.material3.MaterialTheme
@@ -38,17 +40,22 @@ import com.acntem.improveuiapp.presentation.common.OptimizationTechsScreen
 import com.acntem.improveuiapp.presentation.screen.about.AboutScreen
 import com.acntem.improveuiapp.presentation.screen.home.HomeScreen
 import com.acntem.improveuiapp.presentation.screen.ui.LayoutOptimizationScreen
+import com.acntem.improveuiapp.presentation.screen.ux.safenav.SafeNavViewModel
+import com.acntem.improveuiapp.presentation.screen.ux.safenav.UseSafePopBackStack
 import com.acntem.improveuiapp.presentation.ui.theme.dimens
+import org.koin.compose.viewmodel.koinViewModel
 
 
 @Suppress("ParamsComparedByRef")
 @ExperimentalAnimationApi
 @Composable
 fun SetupNavGraph(
+    modifier: Modifier = Modifier,
     navController: NavHostController,
     startDestination: NavScreen,
 ) {
     NavHost(
+        modifier = modifier.background(MaterialTheme.colorScheme.background),
         navController = navController,
         startDestination = startDestination,
         enterTransition = {
@@ -118,7 +125,8 @@ fun SetupNavGraph(
                 }
             ) {
                 NavHost(
-                    modifier = Modifier.padding(it),
+                    modifier = Modifier
+                        .padding(it),
                     navController = mainHostController,
                     startDestination = NavScreen.Home,
                 ) {
@@ -201,6 +209,36 @@ fun SetupNavGraph(
                 title = "UI Optimization",
                 subtitle = "Performance Tips and Best Practice",
                 items = items
+            )
+        }
+
+        composable<NavScreen.UxOptimizationScreen> {
+            val items = remember {
+                listOf(
+                    OptimizationItem(
+                        1,
+                        "Safe back screen",
+                        "Use navigateUp() instead of popBackStack() to safely navigate back to the previous screen.",
+                        NavScreen.SafeBackScreen
+                    ),
+                )
+            }
+            OptimizationTechsScreen(
+                onNavigate = { navScreen ->
+                    navController.navigate(navScreen)
+                },
+                icon = Icons.Default.Lightbulb,
+                title = "UX Optimization",
+                subtitle = "Increase UX Tips and Best Practice",
+                items = items
+            )
+        }
+
+        composable<NavScreen.SafeBackScreen> {
+            val viewModel = koinViewModel<SafeNavViewModel>()
+            UseSafePopBackStack(
+                navController = navController,
+                viewModel = viewModel
             )
         }
 

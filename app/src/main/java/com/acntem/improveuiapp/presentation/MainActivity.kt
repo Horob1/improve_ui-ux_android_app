@@ -10,8 +10,9 @@ import androidx.navigation.compose.rememberNavController
 import com.acntem.improveuiapp.presentation.navigation.NavScreen
 import com.acntem.improveuiapp.presentation.navigation.SetupNavGraph
 import com.acntem.improveuiapp.presentation.ui.theme.ImproveUIAppTheme
+import org.koin.core.component.KoinComponent
 
-class MainActivity : ComponentActivity() {
+class MainActivity : ComponentActivity(), KoinComponent {
     @OptIn(ExperimentalAnimationApi::class)
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)

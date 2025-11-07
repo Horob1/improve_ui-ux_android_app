@@ -107,7 +107,7 @@ fun HomeScreen(
                 name = "UX",
                 desc = "Improve UX technique",
                 onClick = {
-
+                    onNavigate(NavScreen.UxOptimizationScreen)
                 },
                 count = 0,
                 color = MaterialTheme.colorScheme.secondary.copy(

@@ -15,6 +15,7 @@ coreSplashscreen = "1.0.1"
 serialization = "1.6.3"
 composeNavigation = "2.9.5"
 coil = "2.5.0"
+koin = "4.1.0-Beta5"
 
 
 [libraries]
@@ -40,6 +41,10 @@ navigation-compose = { module = "androidx.navigation:navigation-compose", versio
 coil-compose = { module = "io.coil-kt:coil-compose", version.ref = "coil" }
 coil-gif = { module = "io.coil-kt:coil-gif", version.ref = "coil" }
 androidx-datastore-preferences = { module = "androidx.datastore:datastore-preferences", version.ref = "datastorePreferences" }
+koin-compose = { module = "io.insert-koin:koin-compose", version.ref = "koin" }
+koin-compose-viewmodel = { module = "io.insert-koin:koin-compose-viewmodel", version.ref = "koin" }
+koin-compose-viewmodel-navigation = { module = "io.insert-koin:koin-compose-viewmodel-navigation", version.ref = "koin" }
+
 
 [plugins]
 android-application = { id = "com.android.application", version.ref = "agp" }
