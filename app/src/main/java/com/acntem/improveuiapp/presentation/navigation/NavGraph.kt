@@ -40,6 +40,12 @@ import com.acntem.improveuiapp.presentation.common.OptimizationTechsScreen
 import com.acntem.improveuiapp.presentation.screen.about.AboutScreen
 import com.acntem.improveuiapp.presentation.screen.home.HomeScreen
 import com.acntem.improveuiapp.presentation.screen.ui.LayoutOptimizationScreen
+import com.acntem.improveuiapp.presentation.screen.ux.form.UXFormViewModel
+import com.acntem.improveuiapp.presentation.screen.ux.form.UxFormScreen
+import com.acntem.improveuiapp.presentation.screen.ux.groupbutton.UXGBViewModel
+import com.acntem.improveuiapp.presentation.screen.ux.groupbutton.UxGroupButtonScreen
+import com.acntem.improveuiapp.presentation.screen.ux.loading.UxLoadingScreen
+import com.acntem.improveuiapp.presentation.screen.ux.requestpermission.UxRequestPermissionScreen
 import com.acntem.improveuiapp.presentation.screen.ux.safenav.SafeNavViewModel
 import com.acntem.improveuiapp.presentation.screen.ux.safenav.UseSafePopBackStack
 import com.acntem.improveuiapp.presentation.ui.theme.dimens
@@ -221,6 +227,30 @@ fun SetupNavGraph(
                         "Use navigateUp() instead of popBackStack() to safely navigate back to the previous screen.",
                         NavScreen.SafeBackScreen
                     ),
+                    OptimizationItem(
+                        id = 2,
+                        title = "Loading",
+                        description = "Provide a visual loading state to keep users engaged during data loading",
+                        NavScreen.LoadingScreen
+                    ),
+                    OptimizationItem(
+                        id = 3,
+                        title = "Request Permission",
+                        description = "A best practice for handling permissions in Compose",
+                        NavScreen.RequestPermissionScreen
+                    ),
+                    OptimizationItem(
+                        id = 4,
+                        title = "Animated UI",
+                        description = "Apply smooth color and motion transitions to button groups for an interactive experience.",
+                        NavScreen.GBScreen
+                    ),
+                    OptimizationItem(
+                        id = 5,
+                        title = "Form UX Optimization",
+                        description = "Apply optimization techniques to improve form interactions for a smoother, more intuitive user experience.",
+                        NavScreen.FormScreen
+                    )
                 )
             }
             OptimizationTechsScreen(
@@ -238,6 +268,42 @@ fun SetupNavGraph(
             val viewModel = koinViewModel<SafeNavViewModel>()
             UseSafePopBackStack(
                 navController = navController,
+                viewModel = viewModel
+            )
+        }
+
+        composable<NavScreen.LoadingScreen> {
+            UxLoadingScreen(
+                onBack = {
+                    navController.navigateUp()
+                }
+            )
+        }
+
+        composable<NavScreen.RequestPermissionScreen> {
+            UxRequestPermissionScreen(
+                onBack = {
+                    navController.navigateUp()
+                }
+            )
+        }
+
+        composable<NavScreen.GBScreen> {
+            val viewModel = koinViewModel<UXGBViewModel>()
+            UxGroupButtonScreen(
+                onBack = {
+                    navController.navigateUp()
+                },
+                viewModel = viewModel
+            )
+        }
+
+        composable<NavScreen.FormScreen> {
+            val viewModel = koinViewModel<UXFormViewModel>()
+            UxFormScreen(
+                onBack = {
+                    navController.navigateUp()
+                },
                 viewModel = viewModel
             )
         }
@@ -280,7 +346,7 @@ fun NavBottomBar(navController: NavController) {
             )
 
             val iconColor by animateColorAsState(
-                targetValue = if (selected)MaterialTheme.colorScheme.primary else MaterialTheme.colorScheme.onSurface,
+                targetValue = if (selected) MaterialTheme.colorScheme.primary else MaterialTheme.colorScheme.onSurface,
                 animationSpec = tween(
                     durationMillis = 300,
                     easing = FastOutSlowInEasing
