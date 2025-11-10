@@ -9,6 +9,8 @@ import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
+import androidx.compose.foundation.rememberScrollState
+import androidx.compose.foundation.verticalScroll
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Assistant
 import androidx.compose.material3.ElevatedCard
@@ -22,30 +24,31 @@ import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.tooling.preview.Preview
-import androidx.compose.ui.unit.dp
+import androidx.compose.ui.unit.Dp
 import com.acntem.improveuiapp.R
 import com.acntem.improveuiapp.presentation.ui.theme.BitCound
 import com.acntem.improveuiapp.presentation.ui.theme.dimens
 
 @Preview
 @Composable
-fun AboutScreen(){
+fun AboutScreen() {
     Column(
         modifier = Modifier
             .fillMaxSize()
-            .padding(16.dp),
+            .verticalScroll(rememberScrollState())
+            .padding(MaterialTheme.dimens.small2),
         horizontalAlignment = Alignment.CenterHorizontally,
         verticalArrangement = Arrangement.SpaceAround
     ) {
 
         Column(
             horizontalAlignment = Alignment.CenterHorizontally,
-            verticalArrangement = Arrangement.spacedBy(8.dp)
+            verticalArrangement = Arrangement.spacedBy(MaterialTheme.dimens.small1)
         ) {
             Icon(
                 imageVector = Icons.Filled.Assistant,
                 contentDescription = "App Logo",
-                modifier = Modifier.size(MaterialTheme.dimens.logoSize*2),
+                modifier = Modifier.size(MaterialTheme.dimens.logoSize * 2),
                 tint = MaterialTheme.colorScheme.primary
             )
             Text(
@@ -62,13 +65,13 @@ fun AboutScreen(){
                 text = "A demo application for techniques and animations in Jetpack Compose to improve UI/UX skills.",
                 style = MaterialTheme.typography.bodyLarge,
                 textAlign = TextAlign.Center,
-                modifier = Modifier.padding(horizontal = 16.dp)
+                modifier = Modifier.padding(horizontal = MaterialTheme.dimens.small2)
             )
         }
 
         Column(
             horizontalAlignment = Alignment.CenterHorizontally,
-            verticalArrangement = Arrangement.spacedBy(8.dp)
+            verticalArrangement = Arrangement.spacedBy(MaterialTheme.dimens.small1)
         ) {
             Text(
                 text = "Made By",
@@ -101,20 +104,20 @@ fun AboutScreen(){
 fun AboutCard(
     @DrawableRes image: Int = R.drawable.red_face,
     name: String = "Anh",
-    size: Int = 80,
-    modifier: Modifier = Modifier
+    size: Dp = (MaterialTheme.dimens.logoSize * 2),
+    modifier: Modifier = Modifier,
 ) {
     ElevatedCard(
         modifier = modifier
-            .padding(8.dp),
+            .padding(MaterialTheme.dimens.small1),
     ) {
         Image(
             painter = painterResource(id = image),
             modifier = Modifier
                 .size(
-                    size.dp
+                    size
                 )
-                .padding(8.dp)
+                .padding(MaterialTheme.dimens.small1)
                 .align(Alignment.CenterHorizontally),
             contentScale = ContentScale.Crop,
             alignment = Alignment.Center,

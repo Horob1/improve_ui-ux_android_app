@@ -34,6 +34,7 @@ fun CompareScreen(
 
     SimpleSwitchOptimizationLayout(
         title = "OpenGLES vs Canvas",
+        useVerticalScroll = true,
         isOptimizeMode = isOptimizeMode.value,
         onPopBackStack = {
             onBack()

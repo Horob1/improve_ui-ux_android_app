@@ -37,12 +37,13 @@ import com.acntem.improveuiapp.presentation.common.SimpleSwitchOptimizationLayou
 
 @Composable
 fun ModifierOrderOptimizationScreen(
-    onPopBackStack: () -> Unit = {}
+    onPopBackStack: () -> Unit = {},
 ) {
     var useOptimizedOrder by remember { mutableStateOf(true) }
 
     SimpleSwitchOptimizationLayout(
         title = "Modifier Order",
+        useVerticalScroll = true,
         isOptimizeMode = useOptimizedOrder,
         onPopBackStack = onPopBackStack,
         sharedContent = {
@@ -137,7 +138,7 @@ private fun NonOptimizedModifierBox(onClick: () -> Unit) {
 private fun ClickableBoxContent(
     title: String,
     icon: androidx.compose.ui.graphics.vector.ImageVector,
-    color: Color
+    color: Color,
 ) {
     Column(
         horizontalAlignment = Alignment.CenterHorizontally,

@@ -1,9 +1,11 @@
 package com.acntem.improveuiapp.presentation.screen.home
 
+import android.content.res.Configuration
 import androidx.compose.animation.core.Animatable
 import androidx.compose.animation.core.FastOutSlowInEasing
 import androidx.compose.animation.core.tween
 import androidx.compose.foundation.Image
+import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxSize
@@ -11,11 +13,14 @@ import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
+import androidx.compose.foundation.layout.widthIn
 import androidx.compose.foundation.lazy.LazyColumn
+import androidx.compose.foundation.lazy.LazyRow
 import androidx.compose.material3.Card
 import androidx.compose.material3.CardDefaults
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
+import androidx.compose.material3.windowsizeclass.ExperimentalMaterial3WindowSizeClassApi
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.remember
@@ -33,8 +38,11 @@ import androidx.compose.ui.unit.sp
 import com.acntem.improveuiapp.R
 import com.acntem.improveuiapp.presentation.navigation.NavScreen
 import com.acntem.improveuiapp.presentation.ui.theme.BitCound
+import com.acntem.improveuiapp.presentation.ui.theme.ScreenOrientation
+import com.acntem.improveuiapp.presentation.ui.theme.dimens
 import kotlin.random.Random
 
+@OptIn(ExperimentalMaterial3WindowSizeClassApi::class)
 @Preview
 @Composable
 fun HomeScreen(
@@ -52,44 +60,106 @@ fun HomeScreen(
         Random.nextInt(logos.size)
     }
 
-    LazyColumn(
-        modifier = Modifier
-            .fillMaxSize()
-            .padding(top = 16.dp)
-            .padding(horizontal = 8.dp)
-    ) {
-        stickyHeader {
-            Box(
-                modifier = Modifier
-                    .height(160.dp)
-                    .fillMaxWidth()
-                    .padding(bottom = 16.dp)
-            ) {
-                Text(
-                    modifier = Modifier.align(
-                        alignment = Alignment.TopStart
-                    ),
-                    text = "ACN TEAM",
-                    style = MaterialTheme.typography.headlineLarge.copy(
-                        fontFamily = BitCound,
-                        fontWeight = FontWeight.Black,
-                        color = MaterialTheme.colorScheme.primary,
-                    ),
-                    fontSize = (MaterialTheme.typography.headlineLarge.fontSize.value + 32).sp
-                )
-
-                Image(
+    if (ScreenOrientation == Configuration.ORIENTATION_PORTRAIT)
+        LazyColumn(
+            modifier = Modifier
+                .fillMaxSize()
+                .padding(top = MaterialTheme.dimens.small3)
+                .padding(horizontal = MaterialTheme.dimens.small2)
+        ) {
+            stickyHeader {
+                Box(
                     modifier = Modifier
-                        .size(120.dp)
-                        .align(
-                            alignment = Alignment.BottomEnd
+                        .height(MaterialTheme.dimens.logoSize * 4)
+                        .fillMaxWidth()
+                        .padding(bottom = 16.dp)
+                ) {
+                    Text(
+                        modifier = Modifier.align(
+                            alignment = Alignment.TopStart
                         ),
-                    painter = painterResource(id = logos[idx]),
-                    alignment = Alignment.Center,
-                    contentScale = ContentScale.Crop,
-                    contentDescription = "Logo"
+                        text = "ACN TEAM",
+                        style = MaterialTheme.typography.headlineLarge.copy(
+                            fontFamily = BitCound,
+                            fontWeight = FontWeight.Black,
+                            color = MaterialTheme.colorScheme.primary,
+                        ),
+                        fontSize = (MaterialTheme.typography.headlineLarge.fontSize.value + 32).sp
+                    )
+
+                    Image(
+                        modifier = Modifier
+                            .size(MaterialTheme.dimens.logoSize * 3)
+                            .align(
+                                alignment = Alignment.BottomEnd
+                            ),
+                        painter = painterResource(id = logos[idx]),
+                        alignment = Alignment.Center,
+                        contentScale = ContentScale.Crop,
+                        contentDescription = "Logo"
+                    )
+                }
+            }
+
+            item {
+                ImproveNavCard(
+                    name = "UI",
+                    desc = "Improve UI technique",
+                    onClick = {
+                        onNavigate(NavScreen.UiOptimizationScreen)
+                    },
+                    count = 5,
+                    color = MaterialTheme.colorScheme.primary.copy(
+                        alpha = 0.5f
+                    )
                 )
             }
+
+            item {
+                ImproveNavCard(
+                    name = "UX",
+                    desc = "Improve UX technique",
+                    onClick = {
+                        onNavigate(NavScreen.UxOptimizationScreen)
+                    },
+                    count = 5,
+                    color = MaterialTheme.colorScheme.secondary.copy(
+                        alpha = 0.5f
+                    )
+                )
+            }
+
+            item {
+                ImproveNavCard(
+                    name = "OpenGLES",
+                    desc = "Improve UI technique with OpenGLES",
+                    onClick = {
+                        onNavigate(NavScreen.OpenGLESScreen)
+                    },
+                    count = 1,
+                    color = MaterialTheme.colorScheme.tertiary.copy(
+                        alpha = 0.5f
+                    )
+                )
+            }
+        }
+    else LazyRow(
+        modifier = Modifier
+            .fillMaxSize()
+            .padding(vertical = MaterialTheme.dimens.small2),
+        verticalAlignment = Alignment.CenterVertically,
+        horizontalArrangement = Arrangement.spacedBy(MaterialTheme.dimens.small2)
+    ) {
+        item {
+            Image(
+                modifier = Modifier
+                    .size(MaterialTheme.dimens.logoSize * 3)
+                    .padding(MaterialTheme.dimens.small1),
+                painter = painterResource(id = logos[(idx + 1) % logos.size]),
+                alignment = Alignment.Center,
+                contentScale = ContentScale.Crop,
+                contentDescription = "Logo"
+            )
         }
 
         item {
@@ -133,6 +203,18 @@ fun HomeScreen(
                 )
             )
         }
+
+        item {
+            Image(
+                modifier = Modifier
+                    .size(MaterialTheme.dimens.logoSize * 3)
+                    .padding(MaterialTheme.dimens.small1),
+                painter = painterResource(id = logos[idx]),
+                alignment = Alignment.Center,
+                contentScale = ContentScale.Crop,
+                contentDescription = "Logo"
+            )
+        }
     }
 }
 
@@ -162,8 +244,12 @@ fun ImproveNavCard(
 
     Card(
         modifier = Modifier
+            .widthIn(min = 360.dp)
             .fillMaxWidth()
-            .padding(vertical = 8.dp, horizontal = 4.dp)
+            .padding(
+                vertical = MaterialTheme.dimens.small1,
+                horizontal = MaterialTheme.dimens.small1
+            )
             .graphicsLayer(
                 rotationX = rotation.value,
                 rotationY = 0f,
@@ -178,8 +264,8 @@ fun ImproveNavCard(
         Box(
             Modifier
                 .fillMaxWidth()
-                .height(180.dp)
-                .padding(16.dp)
+                .height(MaterialTheme.dimens.logoSize * 4.5f)
+                .padding(MaterialTheme.dimens.small2)
         ) {
             Column(
                 modifier = Modifier.align(

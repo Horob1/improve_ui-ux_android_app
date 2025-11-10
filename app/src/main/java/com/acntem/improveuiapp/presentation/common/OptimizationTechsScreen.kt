@@ -3,7 +3,6 @@ package com.acntem.improveuiapp.presentation.common
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
-import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
@@ -15,8 +14,8 @@ import androidx.compose.material3.Scaffold
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.vector.ImageVector
-import androidx.compose.ui.unit.dp
 import com.acntem.improveuiapp.presentation.navigation.NavScreen
+import com.acntem.improveuiapp.presentation.ui.theme.dimens
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
@@ -25,14 +24,14 @@ fun OptimizationTechsScreen(
     icon: ImageVector,
     title: String,
     subtitle: String,
-    items: List<OptimizationItem>
+    items: List<OptimizationItem>,
 ) {
     Scaffold { padding ->
         LazyColumn(
             modifier = Modifier
                 .padding(padding)
                 .fillMaxSize(),
-            verticalArrangement = Arrangement.spacedBy(16.dp)
+            verticalArrangement = Arrangement.spacedBy(MaterialTheme.dimens.small2)
         ) {
             stickyHeader {
                 Box(
@@ -41,7 +40,12 @@ fun OptimizationTechsScreen(
                         .background(MaterialTheme.colorScheme.background)
                 ) {
                     HeaderSection(
-                        modifier = Modifier.padding(vertical = 8.dp, horizontal = 16.dp).fillMaxWidth(),
+                        modifier = Modifier
+                            .padding(
+                                vertical = MaterialTheme.dimens.small1,
+                                horizontal = MaterialTheme.dimens.small2
+                            )
+                            .fillMaxWidth(),
                         icon = icon,
                         title = title,
                         subtitle = subtitle
@@ -49,7 +53,10 @@ fun OptimizationTechsScreen(
                 }
             }
             items(items, key = OptimizationItem::id) { item ->
-                OptimizationCard(modifier = Modifier.padding(horizontal = 24.dp), item = item) {
+                OptimizationCard(
+                    modifier = Modifier.padding(horizontal = MaterialTheme.dimens.medium1),
+                    item = item
+                ) {
                     onNavigate(item.navScreen)
                 }
             }

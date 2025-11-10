@@ -11,6 +11,7 @@ import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
+import androidx.compose.foundation.layout.widthIn
 import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.icons.Icons
@@ -29,6 +30,7 @@ import androidx.compose.ui.graphics.Brush
 import androidx.compose.ui.graphics.vector.ImageVector
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import com.acntem.improveuiapp.presentation.ui.theme.dimens
 
 @Composable
 fun OptimizationCard(
@@ -38,6 +40,9 @@ fun OptimizationCard(
 ) {
     Card(
         modifier = modifier
+            .widthIn(
+                min = MaterialTheme.dimens.logoSize * 9
+            )
             .fillMaxWidth()
             .clickable(
                 interactionSource = remember { MutableInteractionSource() },
@@ -68,7 +73,8 @@ fun OptimizationCard(
                     item.description,
                     style = MaterialTheme.typography.bodyLarge,
                     color = MaterialTheme.colorScheme.onSurfaceVariant,
-                    lineHeight = 22.sp
+                    lineHeight = 22.sp,
+                    maxLines = 2
                 )
             }
 
@@ -89,7 +95,7 @@ fun GradientBox(id: Int) {
 
     Box(
         modifier = Modifier
-            .size(40.dp)
+            .size(MaterialTheme.dimens.logoSize)
             .clip(RoundedCornerShape(12.dp))
             .background(Brush.linearGradient(colors)),
         contentAlignment = Alignment.Center
@@ -108,7 +114,7 @@ fun IconBox(
 ) {
     Box(
         modifier = Modifier
-            .size(44.dp)
+            .size(MaterialTheme.dimens.logoSize)
             .clip(CircleShape)
             .background(MaterialTheme.colorScheme.primaryContainer),
         contentAlignment = Alignment.Center

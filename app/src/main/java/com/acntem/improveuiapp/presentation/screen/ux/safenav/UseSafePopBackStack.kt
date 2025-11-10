@@ -56,6 +56,7 @@ fun UseSafePopBackStack(
     } else
         SimpleSwitchOptimizationLayout(
             title = "Safe Back",
+            useVerticalScroll = true,
             isOptimizeMode = state.optimizeMode,
             onPopBackStack = {
                 navController.navigateUp()
