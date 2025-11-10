@@ -37,4 +37,6 @@ sealed class NavScreen {
     @Serializable
     data object LayoutOptimizationScreen : NavScreen()
 
+    @Serializable
+    data object OpenGLESScreen : NavScreen()
 }

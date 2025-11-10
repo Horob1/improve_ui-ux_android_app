@@ -39,6 +39,7 @@ import com.acntem.improveuiapp.presentation.common.OptimizationItem
 import com.acntem.improveuiapp.presentation.common.OptimizationTechsScreen
 import com.acntem.improveuiapp.presentation.screen.about.AboutScreen
 import com.acntem.improveuiapp.presentation.screen.home.HomeScreen
+import com.acntem.improveuiapp.presentation.screen.opengles.CompareScreen
 import com.acntem.improveuiapp.presentation.screen.ui.LayoutOptimizationScreen
 import com.acntem.improveuiapp.presentation.screen.ux.form.UXFormViewModel
 import com.acntem.improveuiapp.presentation.screen.ux.form.UxFormScreen
@@ -310,6 +311,14 @@ fun SetupNavGraph(
 
         composable<NavScreen.LayoutOptimizationScreen> {
             LayoutOptimizationScreen(
+            )
+        }
+
+        composable<NavScreen.OpenGLESScreen> {
+            CompareScreen(
+                onBack = {
+                    navController.navigateUp()
+                }
             )
         }
     }

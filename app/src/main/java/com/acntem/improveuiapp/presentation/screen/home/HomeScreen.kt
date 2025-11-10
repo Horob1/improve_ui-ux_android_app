@@ -4,7 +4,6 @@ import androidx.compose.animation.core.Animatable
 import androidx.compose.animation.core.FastOutSlowInEasing
 import androidx.compose.animation.core.tween
 import androidx.compose.foundation.Image
-import androidx.compose.foundation.gestures.detectTapGestures
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxSize
@@ -24,7 +23,6 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.graphicsLayer
-import androidx.compose.ui.input.pointer.pointerInput
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.platform.LocalDensity
 import androidx.compose.ui.res.painterResource
@@ -35,13 +33,12 @@ import androidx.compose.ui.unit.sp
 import com.acntem.improveuiapp.R
 import com.acntem.improveuiapp.presentation.navigation.NavScreen
 import com.acntem.improveuiapp.presentation.ui.theme.BitCound
-import kotlinx.coroutines.delay
 import kotlin.random.Random
 
 @Preview
 @Composable
 fun HomeScreen(
-    onNavigate: (NavScreen) -> Unit = {}
+    onNavigate: (NavScreen) -> Unit = {},
 ) {
     val logos = remember {
         listOf(
@@ -56,17 +53,22 @@ fun HomeScreen(
     }
 
     LazyColumn(
-        modifier = Modifier.fillMaxSize()
+        modifier = Modifier
+            .fillMaxSize()
             .padding(top = 16.dp)
             .padding(horizontal = 8.dp)
     ) {
         stickyHeader {
             Box(
-                modifier = Modifier.height(160.dp).fillMaxWidth().padding(bottom = 16.dp)
+                modifier = Modifier
+                    .height(160.dp)
+                    .fillMaxWidth()
+                    .padding(bottom = 16.dp)
             ) {
-                Text(modifier = Modifier.align(
-                    alignment = Alignment.TopStart
-                ),
+                Text(
+                    modifier = Modifier.align(
+                        alignment = Alignment.TopStart
+                    ),
                     text = "ACN TEAM",
                     style = MaterialTheme.typography.headlineLarge.copy(
                         fontFamily = BitCound,
@@ -77,9 +79,11 @@ fun HomeScreen(
                 )
 
                 Image(
-                    modifier = Modifier.size(120.dp).align(
-                        alignment = Alignment.BottomEnd
-                    ),
+                    modifier = Modifier
+                        .size(120.dp)
+                        .align(
+                            alignment = Alignment.BottomEnd
+                        ),
                     painter = painterResource(id = logos[idx]),
                     alignment = Alignment.Center,
                     contentScale = ContentScale.Crop,
@@ -109,8 +113,22 @@ fun HomeScreen(
                 onClick = {
                     onNavigate(NavScreen.UxOptimizationScreen)
                 },
-                count = 0,
+                count = 5,
                 color = MaterialTheme.colorScheme.secondary.copy(
+                    alpha = 0.5f
+                )
+            )
+        }
+
+        item {
+            ImproveNavCard(
+                name = "OpenGLES",
+                desc = "Improve UI technique with OpenGLES",
+                onClick = {
+                    onNavigate(NavScreen.OpenGLESScreen)
+                },
+                count = 1,
+                color = MaterialTheme.colorScheme.tertiary.copy(
                     alpha = 0.5f
                 )
             )
@@ -125,7 +143,7 @@ fun ImproveNavCard(
     desc: String = "Improve UI technique",
     onClick: () -> Unit = {},
     count: Int = 0,
-    color: Color = MaterialTheme.colorScheme.primary
+    color: Color = MaterialTheme.colorScheme.primary,
 ) {
 
     val density = LocalDensity.current.density
@@ -143,27 +161,25 @@ fun ImproveNavCard(
     }
 
     Card(
-        modifier = Modifier.fillMaxWidth()
+        modifier = Modifier
+            .fillMaxWidth()
             .padding(vertical = 8.dp, horizontal = 4.dp)
             .graphicsLayer(
                 rotationX = rotation.value,
                 rotationY = 0f,
                 rotationZ = 0f,
                 cameraDistance = 12 * density
-            ).pointerInput(Unit) {
-                detectTapGestures(
-                    onPress = {
-                            tryAwaitRelease()
-                            onClick()
-                    }
-                )
-            },
+            ),
         colors = CardDefaults.cardColors().copy(
             containerColor = color
         ),
+        onClick = onClick
     ) {
         Box(
-            Modifier.fillMaxWidth().height(180.dp).padding(16.dp)
+            Modifier
+                .fillMaxWidth()
+                .height(180.dp)
+                .padding(16.dp)
         ) {
             Column(
                 modifier = Modifier.align(
