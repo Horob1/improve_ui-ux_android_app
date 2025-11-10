@@ -7,6 +7,7 @@ import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
+import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
@@ -69,18 +70,20 @@ fun ModifierOrderOptimizationScreen(
             }
         },
         optimizeContent = {
+            Spacer(modifier = Modifier.height(24.dp))
             Column(
                 modifier = Modifier.fillMaxSize(),
-                verticalArrangement = Arrangement.Center,
+                verticalArrangement = Arrangement.spacedBy(24.dp),
             ) {
                 OptimizedModifierBox(onClick = { /* Demo click */ })
                 OptimizedBackgroundPaddingBox()
             }
         },
         nonOptimizeContent = {
+            Spacer(modifier = Modifier.height(24.dp))
             Column(
                 modifier = Modifier.fillMaxSize(),
-                verticalArrangement = Arrangement.Center,
+                verticalArrangement = Arrangement.spacedBy(24.dp),
             ) {
                 NonOptimizedModifierBox(onClick = { /* Demo click */ })
                 NonOptimizedBackgroundPaddingBox()

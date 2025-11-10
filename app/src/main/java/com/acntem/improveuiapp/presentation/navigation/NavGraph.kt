@@ -44,7 +44,6 @@ import com.acntem.improveuiapp.presentation.screen.ui.image.ImageOptimizationScr
 import com.acntem.improveuiapp.presentation.screen.ui.lazykey.LazyListOptimizationScreen
 import com.acntem.improveuiapp.presentation.screen.ui.modifer.ModifierOrderOptimizationScreen
 import com.acntem.improveuiapp.presentation.screen.ui.recompose.StableImmutableScreen
-import com.acntem.improveuiapp.presentation.screen.ui.LayoutOptimizationScreen
 import com.acntem.improveuiapp.presentation.screen.ux.form.UXFormViewModel
 import com.acntem.improveuiapp.presentation.screen.ux.form.UxFormScreen
 import com.acntem.improveuiapp.presentation.screen.ux.groupbutton.UXGBViewModel
@@ -278,7 +277,8 @@ fun SetupNavGraph(
         }
         composable<NavScreen.ModifierOrderOptimizationScreen> {
             ModifierOrderOptimizationScreen(
-                onPopBackStack = { navController.navigateUp() }
+                onPopBackStack = { navController.navigateUp() })
+        }
         composable<NavScreen.LoadingScreen> {
             UxLoadingScreen(
                 onBack = {
@@ -312,11 +312,6 @@ fun SetupNavGraph(
                     navController.navigateUp()
                 },
                 viewModel = viewModel
-            )
-        }
-
-        composable<NavScreen.LayoutOptimizationScreen> {
-            LayoutOptimizationScreen(
             )
         }
     }
