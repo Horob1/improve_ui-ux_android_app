@@ -99,7 +99,7 @@ fun HomeScreen(
                 onClick = {
                     onNavigate(NavScreen.UiOptimizationScreen)
                 },
-                count = 0,
+                count = 5,
                 color = MaterialTheme.colorScheme.primary.copy(
                     alpha = 0.5f
                 )

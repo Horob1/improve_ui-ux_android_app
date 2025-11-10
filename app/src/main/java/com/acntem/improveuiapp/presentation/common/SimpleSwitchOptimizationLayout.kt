@@ -38,6 +38,7 @@ fun SimpleSwitchOptimizationLayout(
     sharedContent: @Composable () -> Unit = {},
     nonOptimizeContent: @Composable () -> Unit = {},
     onPopBackStack: () -> Unit = {},
+    useVerticalScroll: Boolean = false
 ) {
     Scaffold(
         topBar = {
@@ -57,10 +58,16 @@ fun SimpleSwitchOptimizationLayout(
         },
     ) { paddingValues ->
         Column(
-            modifier = Modifier
+            modifier =if(
+                useVerticalScroll
+            ) Modifier
                 .fillMaxSize()
                 .padding(paddingValues)
                 .verticalScroll(rememberScrollState())
+                .imePadding()
+            else Modifier
+                .fillMaxSize()
+                .padding(paddingValues)
                 .imePadding(),
             horizontalAlignment = Alignment.CenterHorizontally,
             verticalArrangement = Arrangement.Center

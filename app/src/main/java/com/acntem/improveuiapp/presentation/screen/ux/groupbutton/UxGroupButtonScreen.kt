@@ -133,6 +133,7 @@ fun UxGroupButtonScreen(
             Box(
                 modifier = Modifier
                     .fillMaxSize()
+                    .padding(it)
                     .background(MaterialTheme.colorScheme.background),
                 contentAlignment = Alignment.Center
             ) {
@@ -143,6 +144,7 @@ fun UxGroupButtonScreen(
                 Box(
                     modifier = Modifier
                         .fillMaxSize()
+                        .padding(it)
                         .background(backgroundColor),
                     contentAlignment = Alignment.Center
                 ) {

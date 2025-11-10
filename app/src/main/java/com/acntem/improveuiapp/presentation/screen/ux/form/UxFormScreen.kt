@@ -83,6 +83,7 @@ fun UxFormScreen(
         SimpleSwitchOptimizationLayout(
             title = "Improve Form UX",
             isOptimizeMode = mode,
+            useVerticalScroll = true,
             onPopBackStack = {
                 onBack()
             },
@@ -240,7 +241,7 @@ fun OptimizeForm(
                             if (!it.isFocused)
                                 onValidateForm(
                                     formError.copy(
-                                        emailError =if(formState.email.isEmpty()) false else !isValidEmail(
+                                        emailError = if (formState.email.isEmpty()) false else !isValidEmail(
                                             formState.email
                                         )
                                     )
@@ -302,7 +303,7 @@ fun OptimizeForm(
                             if (!it.isFocused) {
                                 onValidateForm(
                                     formError.copy(
-                                        nameError = if(formState.name.isEmpty()) false else !isValidName(
+                                        nameError = if (formState.name.isEmpty()) false else !isValidName(
                                             formState.name
                                         )
                                     )
@@ -363,7 +364,7 @@ fun OptimizeForm(
                             if (!it.isFocused)
                                 onValidateForm(
                                     formError.copy(
-                                        passwordError = if(formState.password.isEmpty()) false else !isValidPassword(
+                                        passwordError = if (formState.password.isEmpty()) false else !isValidPassword(
                                             formState.password
                                         )
                                     )
@@ -435,7 +436,7 @@ fun OptimizeForm(
                             if (!it.isFocused)
                                 onValidateForm(
                                     formError.copy(
-                                        confirmPasswordError = if(formState.confirmPassword.isEmpty()) false else !isValidConfirmPassword(
+                                        confirmPasswordError = if (formState.confirmPassword.isEmpty()) false else !isValidConfirmPassword(
                                             formState.password,
                                             formState.confirmPassword
                                         )
