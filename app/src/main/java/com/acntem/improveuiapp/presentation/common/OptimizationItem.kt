@@ -6,5 +6,5 @@ data class OptimizationItem(
     val id: Int,
     val title: String,
     val description: String,
-    val navScreen: NavScreen = NavScreen.LayoutOptimizationScreen
+    val navScreen: NavScreen = NavScreen.ColumnOptimizationScreen
 )
