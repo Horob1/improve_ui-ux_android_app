@@ -35,7 +35,19 @@ sealed class NavScreen {
     data object FormScreen : NavScreen()
 
     @Serializable
-    data object LayoutOptimizationScreen : NavScreen()
+    data object ColumnOptimizationScreen : NavScreen()
+
+    @Serializable
+    data object LazyListOptimizationScreen : NavScreen()
+
+    @Serializable
+    data object StableImmutableScreen : NavScreen()
+
+    @Serializable
+    data object ImageOptimizationScreen : NavScreen()
+
+    @Serializable
+    data object ModifierOrderOptimizationScreen : NavScreen()
 
     @Serializable
     data object OpenGLESScreen : NavScreen()
