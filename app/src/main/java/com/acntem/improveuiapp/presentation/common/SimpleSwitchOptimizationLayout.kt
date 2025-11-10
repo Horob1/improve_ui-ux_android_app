@@ -11,7 +11,10 @@ import androidx.compose.animation.togetherWith
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxSize
+import androidx.compose.foundation.layout.imePadding
 import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.rememberScrollState
+import androidx.compose.foundation.verticalScroll
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.automirrored.filled.ArrowBackIos
 import androidx.compose.material3.ExperimentalMaterial3Api
@@ -29,12 +32,12 @@ import androidx.compose.ui.tooling.preview.Preview
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun SimpleSwitchOptimizationLayout(
-    title: String =  "UI Optimization 🎶",
+    title: String = "UI Optimization 🎶",
     isOptimizeMode: Boolean = true,
     optimizeContent: @Composable () -> Unit = {},
     sharedContent: @Composable () -> Unit = {},
-    nonOptimizeContent: @Composable () -> Unit= {},
-    onPopBackStack: () -> Unit = {}
+    nonOptimizeContent: @Composable () -> Unit = {},
+    onPopBackStack: () -> Unit = {},
 ) {
     Scaffold(
         topBar = {
@@ -56,7 +59,9 @@ fun SimpleSwitchOptimizationLayout(
         Column(
             modifier = Modifier
                 .fillMaxSize()
-                .padding(paddingValues),
+                .padding(paddingValues)
+                .verticalScroll(rememberScrollState())
+                .imePadding(),
             horizontalAlignment = Alignment.CenterHorizontally,
             verticalArrangement = Arrangement.Center
         ) {
@@ -87,7 +92,7 @@ fun SimpleSwitchOptimizationLayout(
                         SizeTransform(clip = false)
                     )
                 }
-            ) {state ->
+            ) { state ->
                 if (state) {
                     optimizeContent()
                 } else {

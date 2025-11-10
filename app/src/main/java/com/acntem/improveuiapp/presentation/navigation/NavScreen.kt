@@ -22,6 +22,17 @@ sealed class NavScreen {
     @Serializable
     data object SafeBackScreen : NavScreen()
 
+    @Serializable
+    data object LoadingScreen : NavScreen()
+
+    @Serializable
+    data object RequestPermissionScreen : NavScreen()
+
+    @Serializable
+    data object GBScreen : NavScreen()
+
+    @Serializable
+    data object FormScreen : NavScreen()
 
     @Serializable
     data object ColumnOptimizationScreen : NavScreen()
@@ -38,5 +49,5 @@ sealed class NavScreen {
     @Serializable
     data object ModifierOrderOptimizationScreen : NavScreen()
 
-
+    data object LayoutOptimizationScreen : NavScreen()
 }
